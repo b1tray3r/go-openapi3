@@ -19,31 +19,31 @@ The backend is implemented in the `internal/server/server.go`file.
 1. Clone the project
 
 ```sh
-$ git clone https://github.com/b1tray3r/go-openapi3.git
+git clone https://github.com/b1tray3r/go-openapi3.git
 ```
 
 2. Change the directory
 
 ```sh
-$ cd go-openapi3
+cd go-openapi3
 ```
 
 3. Install openapi-gen
 
 ```shell
-$ go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest
+go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest
 ```
 
 4. Install air
 
 ```sh
-$ go install github.com/air-verse/air@latest
+go install github.com/air-verse/air@latest
 ```
 
 5. Launch
 
 ```sh
-$ air
+air
 ```
 
 ### Details
