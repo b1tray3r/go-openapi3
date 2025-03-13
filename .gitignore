@@ -1,0 +1,3 @@
+embed/swagger/openapi3.json
+*.gen.go
+tmp/
