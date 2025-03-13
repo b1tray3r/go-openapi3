@@ -7,7 +7,7 @@ The generation and build process is using [air](https://github.com/air-verse/air
 The OpenAPI defintion is defined with code using go in the `internal/openapi/definition.go` file.
 
 During the build steps air is going to generate the `openapi3.json` file in the `embed/swagger` directory.
-Additionally, the according server interfaces will be generated in the `pkg/api/openapi3.gen.go` file.
+Additionally, the according server interfaces are generated with [oapi-codegen](https://github.com/oapi-codegen/oapi-codegen)) into the `pkg/api/` folder.
 
 The application will serve the Swagger-UI at `swagger/` endpoint.
 
