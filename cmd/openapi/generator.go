@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"flag"
-	"fmt"
 	"log"
 	"os"
 	"path"
@@ -47,6 +46,4 @@ func main() {
 	if err := os.WriteFile(target, data, 0640); err != nil {
 		log.Fatalf("Couldn't write json: %s", err)
 	}
-
-	fmt.Println("all generated")
 }
