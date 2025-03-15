@@ -32,13 +32,52 @@ func NewDefinition() *openapi3.T {
 					Summary:     "HealthCheck without authentication",
 					Description: "Checks the availablility of the API server.",
 					Get: &openapi3.Operation{
-						Tags:    []string{"General"},
+						Tags:    []string{"Public"},
 						Summary: "Get health status",
 						Responses: openapi3.NewResponses(
 							openapi3.WithStatus(
 								http.StatusOK,
 								&openapi3.ResponseRef{
-									Ref: "#/components/responses/HealthCheckResponse",
+									Ref: "#/components/responses/SuccessResponse",
+								},
+							),
+							openapi3.WithStatus(
+								http.StatusInternalServerError,
+								&openapi3.ResponseRef{
+									Ref: "#/components/responses/ErrorResponse",
+								},
+							),
+						),
+					},
+				},
+			),
+			openapi3.WithPath(
+				"/test",
+				&openapi3.PathItem{
+					Summary:     "Test endpoint with authentication",
+					Description: "Checks the availablility of the API server.",
+					Get: &openapi3.Operation{
+						Tags:    []string{"Private"},
+						Summary: "Test endpoint with authentication",
+						Security: openapi3.NewSecurityRequirements().
+							With(openapi3.NewSecurityRequirement().Authenticate("apiKeyAuth")),
+						Responses: openapi3.NewResponses(
+							openapi3.WithStatus(
+								http.StatusOK,
+								&openapi3.ResponseRef{
+									Ref: "#/components/responses/SuccessResponse",
+								},
+							),
+							openapi3.WithStatus(
+								http.StatusUnauthorized,
+								&openapi3.ResponseRef{
+									Ref: "#/components/responses/ErrorResponse",
+								},
+							),
+							openapi3.WithStatus(
+								http.StatusInternalServerError,
+								&openapi3.ResponseRef{
+									Ref: "#/components/responses/ErrorResponse",
 								},
 							),
 						),
@@ -48,11 +87,13 @@ func NewDefinition() *openapi3.T {
 		),
 		Components: &openapi3.Components{
 			SecuritySchemes: openapi3.SecuritySchemes{
-				"basicAuth": &openapi3.SecuritySchemeRef{
+				"apiKeyAuth": &openapi3.SecuritySchemeRef{
 					Value: openapi3.NewSecurityScheme().
-						WithDescription("HTTP Basic authentication").
-						WithType("http").
-						WithScheme("basic"),
+						WithDescription("API Key authentication").
+						WithType("apiKey").
+						WithName("Authorization").
+						WithIn("header").
+						WithBearerFormat("bearer"),
 				},
 			},
 			Schemas: openapi3.Schemas{
@@ -76,7 +117,7 @@ func NewDefinition() *openapi3.T {
 							),
 						),
 				},
-				"HealthCheckResponse": {
+				"SuccessResponse": {
 					Value: openapi3.NewResponse().
 						WithDescription("Server is running!").
 						WithContent(

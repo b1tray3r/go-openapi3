@@ -22,8 +22,8 @@ tmp_dir = "tmp"
   poll_interval = 0
   post_cmd = []
   pre_cmd = [
-    "go run ./cmd/openapi/generator.go -path ./embed/swagger/",
-    "oapi-codegen --config=oapi-codegen.yml embed/swagger/openapi3.json",
+    "go run ./cmd/openapi/generator.go -path ./cmd/server/swagger/",
+    "oapi-codegen --config=oapi-codegen.yml cmd/server/swagger/openapi3.json",
     "go mod tidy",
   ]
   rerun = false

@@ -4,7 +4,6 @@ import (
 	"context"
 	"net/http"
 
-	static "github.com/b1tray3r/go-openapi3/embed"
 	"github.com/b1tray3r/go-openapi3/pkg/api"
 
 	"github.com/labstack/echo/v4"
@@ -31,20 +30,6 @@ func NewEchoServer() *echo.Echo {
 		// add middlewares here if needed
 		[]api.StrictMiddlewareFunc{},
 	))
-
-	e.GET(
-		"/swagger/*",
-		echo.WrapHandler(
-			http.StripPrefix(
-				"/",
-				http.FileServer(
-					http.FS(
-						static.StaticFiles,
-					),
-				),
-			),
-		),
-	)
 
 	return e
 }
