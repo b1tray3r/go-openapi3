@@ -6,7 +6,7 @@ The generation and build process is using [air](https://github.com/air-verse/air
 
 The OpenAPI defintion is defined with code using go in the `internal/openapi/definition.go` file.
 
-During the build steps air is going to generate the `openapi3.json` file in the `embed/swagger` directory.
+During the build steps air is going to generate the `openapi3.json` file in the `cmd/swagger` directory.
 Additionally, the according server interfaces are generated with [oapi-codegen](https://github.com/oapi-codegen/oapi-codegen) into the `pkg/api/` folder.
 
 The application will serve the Swagger-UI at `swagger/` endpoint.
@@ -61,7 +61,7 @@ The file is requesting the generated `/swagger/openapi3.json` file to build the 
 Using air the complete build pipeline is executed on the fly.
 When building the final application you have to execute all `pre_cmd` entries in the `.air.toml` configuration.
 
-Please note that all `*.gen.go` files are ignored by git and air.
+Please note that all `*.gen.go` files are ignored by air.
 It is important for air to exclude this files, because generating these file(s) will cause air to loop indefinetly.
 
 #### oapi-codegen.yml
